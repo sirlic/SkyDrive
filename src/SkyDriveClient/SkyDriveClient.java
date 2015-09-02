@@ -13,14 +13,15 @@ public class SkyDriveClient {
     private static final String[] options = {"  0    列出选项","  1    设置网盘服务器地址",
                 "  2    设置网盘服务器端口","  3    文件上传","  4    文件下载","  5    退出"};
     private static final String[] fileOpts = {"0 返回上层","1 设置文件路径","2 设置存储路径","3 开始传输"};
-    private static final String[] tip = {"请选择命令 (0-5):"};
+    private static final String[] tip1 = {"请选择命令 (0-5):"};
+    private static final String[] tip2 = {"请选择命令 (0-3):"};
 	private static  Communication con = Communication.getInstance();
 	private static String command = "";
 	
 	public static void main(String[] args) {
 		showOpts(options);
 		while(true) {
-			showOpts(tip);
+			showOpts(tip1);
 			command = con.readLocal();
 			if(command.matches("5")) {
 				con.printLocal("程序已退出");
@@ -70,6 +71,7 @@ public class SkyDriveClient {
 	
 	public static void fileHandle(boolean flag) {
 		while(true) {
+            showOpts(tip2);
 			command = con.readLocal();
 			if(command.matches("0")) {
 				showOpts(options);
@@ -100,7 +102,6 @@ public class SkyDriveClient {
 						if(!Configure.setRemoteFilePath(command)) {
 							con.printLocal("网盘文件路径不存在");
 						}
-						
 					}else {
 						con.printLocal("请输入存储文件路径:");
 						command = con.readLocal();
@@ -111,9 +112,7 @@ public class SkyDriveClient {
 					break;
 				case "3":
 					if(flag == true) {
-						if(con.readRemote() == "好的") {
-							con.upLoadFile(Configure.getlocalFilePath());
-						}
+						con.upLoadFile(Configure.getlocalFilePath());
 					}else {
 						con.downLoadFile(Configure.getStorePath(), Configure.getRemoteFilePath());
 					}

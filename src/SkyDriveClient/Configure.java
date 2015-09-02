@@ -76,8 +76,8 @@ public class Configure {
 		Communication con = Communication.getInstance();
 		remoteFilePath = rfp;
 		con.printRemote("文件路径");
-		if(con.readRemote() != null) {
-			con.printRemote(remoteFilePath);
+        if(con.readRemote().matches("好的")) {
+            con.printRemote(remoteFilePath);
 		}
 		
 		return true;

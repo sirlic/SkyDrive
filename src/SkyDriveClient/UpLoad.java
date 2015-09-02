@@ -21,7 +21,7 @@ public class UpLoad {
 	private Communication con = null;
 	private File file;
 	private Socket socket;
-	private byte[] data = null;
+	private byte[] data = new byte[1024];
 	
 	public UpLoad(String file, Socket socket) {
 		this.file = new File(file);
@@ -42,17 +42,20 @@ public class UpLoad {
 	}
 	
 	public void start() {
-		con.printLocal("开始上传:  " + file.getName() + "到 " 
-				+ socket.getInetAddress() + ":" + socket.getPort());
-		try {
-			while(fileInputStream.read(data) != -1) {
-				outputStream.write(data);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			close();
-		}
-		con.printLocal("文件上传完毕。");
+        con.printRemote("文件上传");
+        if(con.readRemote().matches("好的")) {
+            con.printLocal("开始上传:  " + file.getName() + "到 " 
+                    + socket.getInetAddress() + ":" + socket.getPort());
+            try {
+                while(fileInputStream.read(data) != -1) {
+                    outputStream.write(data);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                close();
+            }
+            con.printLocal("文件上传完毕。");
+        }
 		close();
 	}
 	

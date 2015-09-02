@@ -22,7 +22,7 @@ public class DownLoad {
 	private File path = null;
 	private File file = null;
 	private Socket socket = null;
-	private byte[] data = null;
+	private byte[] data = new byte[1024];
 	
 	public DownLoad(String path, String file, Socket socket) {
 		this.path = new File(path);

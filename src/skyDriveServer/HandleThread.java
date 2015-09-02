@@ -1,4 +1,4 @@
-package skyDriveServer;
+package SkyDriveServer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,17 +34,18 @@ public class HandleThread implements Runnable{
 			while((strTalk = bufReader.readLine()) != null) {
 				switch(strTalk) {
 					case "文件路径":
-						printWriter.write("好的");
+                        printWriter.println("好的");
+                        printWriter.flush();
 						strTalk = bufReader.readLine();
 						file = strTalk;
 						break;
 					case "文件上传":
-						printWriter.write("好的");
+						printWriter.println("好的");
 						printWriter.flush();
 						new DownLoad(socket,file).start();
 						break;
 					case "文件下载":
-						printWriter.write("好的");
+						printWriter.println("好的");
 						printWriter.flush();
 						new UpLoad(socket,file).start();
 						break;

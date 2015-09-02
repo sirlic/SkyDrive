@@ -1,4 +1,4 @@
-package skyDriveServer;
+package SkyDriveServer;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ public class DownLoad {
 		
 	private FileOutputStream fileOutputStream = null;
 	private InputStream inputStream = null;
-	private byte[] data = null;
+	private byte[] data = new byte[1024];
 
 	public DownLoad(Socket socket,String file) {
 		try {

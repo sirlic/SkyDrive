@@ -91,10 +91,9 @@ public class Communication {
 			connect();
 		}
 		try {
-			while((strTalk = remoteReader.readLine())!=null) {
-            	System.out.println(strTalk);
+			if((strTalk = remoteReader.readLine())!=null) {
+            	printLocal(strTalk);
             }
-			printLocal(strTalk);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
