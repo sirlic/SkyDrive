@@ -8,14 +8,14 @@ import java.net.Socket;
 
 
 /**
-*ʵ�ֿ���̨��������������������
+*实现控制台输入输出，与服务器交流
 *@author lichaung
 *@date  2015/8/29
 *
 */
 
 /**
- * ���õ���ģʽ�õ�һ��Ψһ�Ĺ�ͨ����
+ * 利用单例模式得到一个唯一的沟通中心
  *
  */
 
@@ -66,10 +66,16 @@ public class Communication {
 		return communication;
 	}
 	
+	/**输出字符串到本地终端
+	 * @return String
+	*/
 	public void printLocal(String s) {
 		System.out.println(s);
 	}
 	
+	/**输出字符串到远程终端
+	 * @return String
+	 */
 	public void printRemote(String s) {
 		if(socket == null) {
 			connect();
@@ -77,6 +83,9 @@ public class Communication {
 		remoteWriter.println(s);
 	}
 	
+	/**从本地终端读取后返回字符串
+	*@return String
+	*/
 	public String readLocal() {
 		try {
 			strTalk = localReader.readLine();
@@ -86,6 +95,9 @@ public class Communication {
 		return strTalk;
 	}
 	
+	/**从远程终端读取输入
+	 * @return String
+	*/
 	public String readRemote() {
 		if(socket == null) {
 			connect();
@@ -126,6 +138,8 @@ public class Communication {
 		close();
 	}
 	
+	/**关闭流,清扫现场
+	 */
 	private static void close() {
 		try {
 			if(socket != null)
