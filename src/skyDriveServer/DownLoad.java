@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.Socket;
 
 /**
- * 将用户上传的文件存在本地
+ * 灏嗙敤鎴蜂笂浼犵殑鏂囦欢瀛樺湪鏈湴
  * @author lichuang
  * 
  * @date 2015/8/30
@@ -45,9 +45,11 @@ public class DownLoad {
 			e.printStackTrace();
 			close();
 			return false;
+		} finally {
+			close();
+			return true;
 		}
-		close();
-		return true;
+		
 	}
 	
 	private void close() {
